@@ -1,10 +1,9 @@
-package org.dfhu.sparkingrocks.util;
+package org.dfhu.sparkingrocks.config;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Properties;
-
-import static org.junit.Assert.*;
 
 public class PropertiesConfigTest {
 
@@ -20,9 +19,9 @@ public class PropertiesConfigTest {
       .databaseHostname(hostname)
       .build();
 
-    assertEquals(hostname, config.getDatabaseHostname());
-    assertEquals(dbName, config.getDatabaseName());
-    assertEquals(isDevelopment, config.isDevelopment());
+    Assert.assertEquals(hostname, config.getDatabaseHostname());
+    Assert.assertEquals(dbName, config.getDatabaseName());
+    Assert.assertEquals(isDevelopment, config.isDevelopment());
   }
 
   @Test
@@ -37,8 +36,8 @@ public class PropertiesConfigTest {
     properties.setProperty("", dbName);
     PropertiesConfig config = new PropertiesConfig.Builder(properties).build();
 
-    assertEquals(hostname, config.getDatabaseHostname());
-    assertEquals(dbName, config.getDatabaseName());
-    assertEquals(true, config.isDevelopment());
+    Assert.assertEquals(hostname, config.getDatabaseHostname());
+    Assert.assertEquals(dbName, config.getDatabaseName());
+    Assert.assertEquals(true, config.isDevelopment());
   }
 }

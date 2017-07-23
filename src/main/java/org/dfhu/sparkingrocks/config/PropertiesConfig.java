@@ -1,9 +1,9 @@
-package org.dfhu.sparkingrocks.util;
+package org.dfhu.sparkingrocks.config;
 
 import java.util.Objects;
 import java.util.Properties;
 
-public class PropertiesConfig {
+public class PropertiesConfig implements DatabaseInfoConfig {
 
   private final boolean isDevelopment;
   private final String databaseHostname;
@@ -19,10 +19,12 @@ public class PropertiesConfig {
     return isDevelopment;
   }
 
+  @Override
   public String getDatabaseHostname() {
     return databaseHostname;
   }
 
+  @Override
   public String getDatabaseName() {
     return databaseName;
   }
