@@ -5,6 +5,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 
 public class DataProvider {
+
   public static Datastore get(String packageMap) {
     Morphia morphia = new Morphia();
     // tell Morphia where to find your classes
@@ -15,11 +16,12 @@ public class DataProvider {
       throw new RuntimeException("Could not find packages: " + t.getMessage());
     }
 
-    String mongohostname = System.getProperty("mongohostname");
+    String mongohostName = System.getProperty("mongohostname");
+    String databaseName = System.getProperty("databasename");
 
     // create the Datastore connecting to the default port on the local host
     Datastore datastore = morphia.createDatastore(
-      new MongoClient(mongohostname), "parcelpalsportal");
+      new MongoClient(mongohostName), databaseName);
     datastore.ensureIndexes();
 
     return datastore;
