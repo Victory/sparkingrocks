@@ -8,15 +8,21 @@ public class PropertiesConfig implements DatabaseInfoConfig {
   private final boolean isDevelopment;
   private final String databaseHostname;
   private final String databaseName;
+  private final String analyticsTrackingId;
 
-  private PropertiesConfig(boolean isDevelopment, String databaseHostname, String databaseName) {
+  private PropertiesConfig(boolean isDevelopment, String databaseHostname, String databaseName, String analyticsTrackingId) {
     this.isDevelopment = isDevelopment;
     this.databaseHostname = databaseHostname;
     this.databaseName = databaseName;
+    this.analyticsTrackingId = analyticsTrackingId;
   }
 
   public boolean isDevelopment() {
     return isDevelopment;
+  }
+
+  public String getAnalyticsTrackingId() {
+    return analyticsTrackingId;
   }
 
   @Override
@@ -33,6 +39,7 @@ public class PropertiesConfig implements DatabaseInfoConfig {
     private boolean isDevelopment;
     private String mongoHostname;
     private String databaseName;
+    private String analyticsTrackingId;
 
     public Builder() {
       this(new Properties());
@@ -46,6 +53,8 @@ public class PropertiesConfig implements DatabaseInfoConfig {
       if (property != null) {
         databaseName(property);
       }
+
+      analyticsTrackingId(System.getProperty("analyticsTrackingId"));
     }
 
     private static boolean asBoolean(String propertyKey, boolean defaultValue, Properties properties) {
@@ -72,8 +81,14 @@ public class PropertiesConfig implements DatabaseInfoConfig {
       return this;
     }
 
-    public PropertiesConfig build() {
-      return new PropertiesConfig(isDevelopment, mongoHostname, databaseName);
+    public Builder analyticsTrackingId(String analyticsTrackingId) {
+      this.analyticsTrackingId = analyticsTrackingId;
+      return this;
     }
+
+    public PropertiesConfig build() {
+      return new PropertiesConfig(isDevelopment, mongoHostname, databaseName, analyticsTrackingId);
+    }
+
   }
 }
