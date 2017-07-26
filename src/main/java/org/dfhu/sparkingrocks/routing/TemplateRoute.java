@@ -1,6 +1,7 @@
 package org.dfhu.sparkingrocks.routing;
 
 import com.fizzed.rocker.RockerModel;
+import org.dfhu.sparkingrocks.config.PropertiesConfig;
 import org.dfhu.sparkingrocks.session.VicSession;
 import org.dfhu.sparkingrocks.templateengine.RockerTemplateEngine;
 import spark.Request;
@@ -13,13 +14,17 @@ import spark.Spark;
  */
 public abstract class TemplateRoute extends RouteAdder<TemplateRoute> implements Route {
 
+  public TemplateRoute(PropertiesConfig config) {
+    super(config);
+  }
+
   public abstract RockerModel getRockerModel(Request req, Response res, VicSession vicSession);
 
   @Override
   public void doGet(RouteAdder<TemplateRoute> route) {
     Spark.get(
       getPath(),
-      new RockerTemplateViewRoute(this),
+      new RockerTemplateViewRoute(this, getPropertiesConfig()),
       RockerTemplateEngine.getInstance());
   }
 
@@ -27,7 +32,7 @@ public abstract class TemplateRoute extends RouteAdder<TemplateRoute> implements
   public void doPost(RouteAdder<TemplateRoute> route) {
     Spark.post(
       getPath(),
-      new RockerTemplateViewRoute(this),
+      new RockerTemplateViewRoute(this, getPropertiesConfig()),
       RockerTemplateEngine.getInstance());
   }
 }

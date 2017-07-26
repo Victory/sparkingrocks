@@ -1,6 +1,18 @@
 package org.dfhu.sparkingrocks.routing;
 
+import org.dfhu.sparkingrocks.config.PropertiesConfig;
+
 abstract class RouteAdder<T extends Route> {
+  protected final PropertiesConfig config;
+
+  public RouteAdder(PropertiesConfig config) {
+    this.config = config;
+  }
+
+  protected PropertiesConfig getPropertiesConfig() {
+    return config;
+  }
+
   /**
    * Get the url pattern for this route
    */

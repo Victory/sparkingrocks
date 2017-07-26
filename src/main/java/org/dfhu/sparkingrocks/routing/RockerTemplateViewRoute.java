@@ -1,5 +1,6 @@
 package org.dfhu.sparkingrocks.routing;
 
+import org.dfhu.sparkingrocks.config.PropertiesConfig;
 import org.dfhu.sparkingrocks.session.VicSession;
 import org.dfhu.sparkingrocks.templateengine.RockerTemplateModel;
 import spark.ModelAndView;
@@ -9,9 +10,11 @@ import spark.TemplateViewRoute;
 
 public class RockerTemplateViewRoute implements TemplateViewRoute {
   private final TemplateRoute templateRoute;
+  private final PropertiesConfig config;
 
-  public RockerTemplateViewRoute(TemplateRoute templateRoute) {
+  public RockerTemplateViewRoute(TemplateRoute templateRoute, PropertiesConfig config) {
     this.templateRoute = templateRoute;
+    this.config = config;
   }
 
   @Override
@@ -20,6 +23,6 @@ public class RockerTemplateViewRoute implements TemplateViewRoute {
       templateRoute.getRockerModel(
         request,
         response,
-        new VicSession(request, response)));
+        new VicSession(request, response, config)));
   }
 }
