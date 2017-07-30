@@ -3,7 +3,7 @@ package org.dfhu.sparkingrocks.config;
 import java.util.Objects;
 import java.util.Properties;
 
-public class PropertiesConfig implements DatabaseInfoConfig {
+public class PropertiesConfig implements DatabaseInfoConfig, GoogleAnalyticsConfig {
 
   private final boolean isDevelopment;
   private final String databaseHostname;
@@ -21,6 +21,7 @@ public class PropertiesConfig implements DatabaseInfoConfig {
     return isDevelopment;
   }
 
+  @Override
   public String getAnalyticsTrackingId() {
     return analyticsTrackingId;
   }
@@ -89,6 +90,5 @@ public class PropertiesConfig implements DatabaseInfoConfig {
     public PropertiesConfig build() {
       return new PropertiesConfig(isDevelopment, mongoHostname, databaseName, analyticsTrackingId);
     }
-
   }
 }
